@@ -3,8 +3,10 @@ const submenuEmail=document.querySelector('.menu-email')
 const menuMobile=document.querySelector('.mobile-menu')
 const menuHamIcon=document.querySelector('.menu-icon')
 const menuCarritoCompras=document.querySelector('.navbar-shopping-cart')
-const aside=document.querySelector('.product-detail')
+const aside=document.querySelector('.product-detail-car')
 const cardsContainer=document.querySelector('.cards-container')
+const containerProductDetail=document.querySelector('.product-detail')
+const btnCerrarDetalle=document.querySelector('.product-detail-close')
 
 // array para almacenar los prductos
 const productList=[]
@@ -40,10 +42,12 @@ menuCarritoCompras.addEventListener('click',intercambioMenuCarrito)
 
 function intercambioMenuEmail(){    
     // se valida si el contenedor del carrito de compras contiene la clase inactive.  
-    const isAsideClosed=aside.classList.contains('inactive')   
+    const isAsideClosed=aside.classList.contains('inactive') 
+    const isProductDetail=containerProductDetail.classList.contains('inactive')   
     // si el contenedor del carrito de compras no contiene la clase inactive, se le agrega. La misma lógica se aplica para las demás opciones    
-    if(!isAsideClosed){  
+    if(!isAsideClosed || !isProductDetail){  
         aside.classList.add('inactive')
+        containerProductDetail.classList.add('inactive')
     }
     submenuEmail.classList.toggle('inactive')     
 }
@@ -59,10 +63,12 @@ function intercambioMenuMobile(){
 function intercambioMenuCarrito(){   
     const isMenuMobileClosed=menuMobile.classList.contains('inactive') 
     const issubmenuEmailClosed=menuEmail.classList.contains('inactive') 
+    const isProductDetail=containerProductDetail.classList.contains('inactive') 
 
-    if(!isMenuMobileClosed || !issubmenuEmailClosed){  
+    if(!isMenuMobileClosed || !issubmenuEmailClosed || !isProductDetail){  
         menuMobile.classList.add('inactive')
         submenuEmail.classList.add('inactive')
+        containerProductDetail.classList.add('inactive')
     }
         aside.classList.toggle('inactive')     
 }
@@ -77,6 +83,7 @@ function mostrarListaProductos(arr){
         const productName=document.createElement('p')
         const productInfoFigure=document.createElement('figure')
         const productImgCart=document.createElement('img')
+       
      
         productCard.classList.add('product-card')
         productInfo.classList.add('product-info')
@@ -93,7 +100,26 @@ function mostrarListaProductos(arr){
         productCard.appendChild(productImg)
         productCard.appendChild(productInfo)
         cardsContainer.appendChild(productCard)
+
+        productImg.addEventListener('click',mostrarDetalleProducto)
+        btnCerrarDetalle.addEventListener('click',ocultarDetalleProducto)
+
      }
+}
+
+function mostrarDetalleProducto(){
+    const asideClosed=menuMobile.classList.contains('inactive') 
+    const issubmenuEmailClosed=menuEmail.classList.contains('inactive')    
+
+    if(!asideClosed || !issubmenuEmailClosed ){  
+        aside.classList.add('inactive')
+        submenuEmail.classList.add('inactive')       
+    }
+    containerProductDetail.classList.remove('inactive')   
+}
+
+function ocultarDetalleProducto(){
+    containerProductDetail.classList.add('inactive') 
 }
 
 mostrarListaProductos(productList)
