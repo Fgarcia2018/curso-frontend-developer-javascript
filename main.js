@@ -24,8 +24,7 @@ productList.push({
 })
 productList.push({
     name:'car',
-    price:2000,
-    // image:'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+    price:2000,    
     image:'carro.jpg',
     description:'Vehículo Hibrido, 12 horas de autonomía'
 })
@@ -43,13 +42,31 @@ productList.push({
     description:'Patineta profesional'
 })
 
+productList.push({
+    name:'Racket',
+    price:288,
+    image:'https://i.linio.com/p/0262ce33ce6090da62b4ca9e3cc3c303-catalog.webp',  
+    description:'Professional Racket'
+})
+productList.push({
+    name:'Glasses Cyclism',
+    price:72,
+    image:'https://i.linio.com/p/ad0aa8c5ea9746fa435060244e320bef-catalog.webp',  
+    description:'Cycling Glasses Man Woman Poc Protection + 4 White Blue Lenses + Blue Lens'
+})
 
+
+// Se agrega escuchador de eventos para que al dar click llame a la funcion y muestre el submenu con las opciones de la cuenta de usuario
 menuEmail.addEventListener('click',intercambioMenuEmail)
+// Se agrega escuchador de eventos para que al dar click llame a la funcion y muestre el menu y visualizarlo en version mobile
 menuHamIcon.addEventListener('click',intercambioMenuMobile)
+// Se agrega escuchador de eventos para que al dar click muestre el contenido del carrito de compras
 menuCarritoCompras.addEventListener('click',intercambioMenuCarrito)
+// Se agrega escuchador de eventos para que al dar click realiice la cuenta de los productos seleccionados
 btnAddToCar.addEventListener('click',contarProductosSeleccionados)
    
 
+// Esta funcion muestra u oculta el menu de las opciones de la cuenta de usuario
 function intercambioMenuEmail(){    
     // se valida si el contenedor del carrito de compras contiene la clase inactive.  
     const isAsideClosed=aside.classList.contains('inactive') 
@@ -61,7 +78,7 @@ function intercambioMenuEmail(){
     }
     submenuEmail.classList.toggle('inactive')     
 }
-
+// Esta funcion muestra u oculta el menu version mobile
 function intercambioMenuMobile(){
     const isAsideClosed=aside.classList.contains('inactive')   
     if(!isAsideClosed){  
@@ -69,7 +86,7 @@ function intercambioMenuMobile(){
     }
         menuMobile.classList.toggle('inactive')     
 }  
-
+// Esta funcion muestra u oculta el contenido del carrito de compras
 function intercambioMenuCarrito(){   
     const isMenuMobileClosed=menuMobile.classList.contains('inactive') 
     const issubmenuEmailClosed=menuEmail.classList.contains('inactive') 
@@ -82,7 +99,7 @@ function intercambioMenuCarrito(){
     }
         aside.classList.toggle('inactive')     
 }
-
+// Esta función muestra los productos en existencia
 function mostrarListaProductos(arr){
     for (product of arr){
         const productCard=document.createElement('div')
@@ -122,7 +139,7 @@ function mostrarListaProductos(arr){
 
      }  
 }
-
+// Se muestra el contenedor del producto seleccionado
 function mostrarDetalleProducto(){
     const asideClosed=menuMobile.classList.contains('inactive') 
     const issubmenuEmailClosed=menuEmail.classList.contains('inactive')    
@@ -133,12 +150,11 @@ function mostrarDetalleProducto(){
     }
     containerProductDetail.classList.remove('inactive')   
 }
-
+// Se oculta el contenedor del producto seleccionado
 function ocultarDetalleProducto(){
     containerProductDetail.classList.add('inactive') 
 }
-
-
+// Se muestran los datos del producto seleccionado
 function detallarProducto(name,price,image){
     
     const productDetailImage=document.getElementById('product-image')  
@@ -171,7 +187,6 @@ function deshabilitarButton(name){
     })      
 
 }
-
 
 mostrarListaProductos(productList)
 
